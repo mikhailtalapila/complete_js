@@ -586,46 +586,6 @@
 //
 // console.log(rest1);
 // console.log(rest2);
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -686,55 +646,192 @@ GOOD LUCK 😀
 // }
 //
 // console.log([...menu.entries()]);
-const weekdays = ['mon', 'tues'];
-const openingHours = {
-  [weekdays[0]]: {
-    open: 12,
-    close: 22,
-  },
-  [`you know what day it is ${2 + 3}`]: {
-    open: 11,
-    close: 23,
-  },
-  [weekdays[1]]: {
-    open: 0, // Open 24 hours
-    close: 24,
-  },
-};
+//const weekdays = ['mon', 'tues'];
+//const ;
 // console.log(openingHours);
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order(startedindex, mainindex) {
-    return [this.starterMenu[startedindex], this.mainMenu[mainindex]];
-  },
-  orderPizza(mainIngredient, ...otherIng) {
-    console.log(mainIngredient);
-    console.log(otherIng);
-  },
-  openingHours,
-};
+
 //console.log(restaurant);
 // console.log(restaurant.openingHours.mon?.open);
-const days = ['mon', 'tues', 'wed', 'thur', 'fri', 'sat', 'sun'];
-for (const day of days) {
-  //console.log(day);
-  //
-  //console.log(
-  //  `on ${day} we open at ${restaurant.openingHours[day]?.open ?? 'closed'}`
-  //);
-}
+//const days = ['mon', 'tues', 'wed', 'thur', 'fri', 'sat', 'sun'];
+//for (const day of days) {
+//  //console.log(day);
+//  //
+//  //console.log(
+//  //  `on ${day} we open at ${restaurant.openingHours[day]?.open ?? 'closed'}`
+//  //);
+//}
+//
+//console.log(restaurant.orderNew?.(0, 1) ?? 'Method doesnt exist');
+//
+//const users = [
+//  {
+//    name: 'jonas',
+//    email: 'email@email.com',
+//  },
+//];
+//
+//console.log(users[0]?.name ?? 'User array empty');
+// const restaurant = {
+//   name: 'Classico Italiano',
+//   location: 'Via Angelo Tavanti 23, Firenze, Italy',
+//   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+//   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+//   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+//   order(startedindex, mainindex) {
+//     return [this.starterMenu[startedindex], this.mainMenu[mainindex]];
+//   },
+//   orderPizza(mainIngredient, ...otherIng) {
+//     console.log(mainIngredient);
+//     console.log(otherIng);
+//   },
+//   openingHours: {
+//     mon: {
+//       open: 12,
+//       close: 22,
+//     },
+//     [`you know what day it is ${2 + 3}`]: {
+//       open: 11,
+//       close: 23,
+//     },
+//     tues: {
+//       open: 0, // Open 24 hours
+//       close: 24,
+//     },
+//   },
+// };
+// const openingHours = {
+//   mon: {
+//     open: 12,
+//     close: 22,
+//   },
+//   tues: {
+//     open: 11,
+//     close: 23,
+//   },
+//   wed: {
+//     open: 0, // Open 24 hours
+//     close: 24,
+//   },
+// };
+// const properties = Object.keys(openingHours);
+// // const days = ['mon', 'tues', 'wed', 'thur', 'fri', 'sat', 'sun'];
+// let str = `we are open on ${properties.length} days:  `;
+// for (const day of Object.keys(openingHours)) {
+//   str += `${day}, `;
+// }
+// console.log(str);
 
-console.log(restaurant.orderNew?.(0, 1) ?? 'Method doesnt exist');
+// const values = Object.values(openingHours);
+// console.log(values);
 
-const users = [
-  {
-    name: 'jonas',
-    email: 'email@email.com',
+// const entries = Object.entries(openingHours);
+// // console.log(entries);
+// for (const [key, { open, close }] of entries) {
+//   console.log(`on ${key} we open at ${open} and close at ${close}`);
+// }
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
   },
-];
+};
+///////////////////////////////////////
+// Coding Challenge #2
 
-console.log(users[0]?.name ?? 'User array empty');
+/* 
+Let's continue with our football betting app!
+
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+*/
+//1
+// for (const [i, el] of game.players.entries()) {
+//   console.log(`INTRODUCING THE TEAM ${i + 1}:`);
+//   for (const [j, elem] of el.entries()) {
+//     console.log(`${i + 1}: ${elem}`);
+//   }
+// }
+// console.log(`And the scorers for the games are`);
+//
+// for (const [i, el] of game.scored.entries()) {
+//   console.log(`Goal ${i + 1}: ${el}`);
+// }
+//2
+// const odds = Object.values(game.odds);
+// console.log(odds);
+// let average = 0;
+// for (const odd of odds) {
+//   sum += odd;
+// }
+// console.log(`the avarage is ${sum / odds.length}`);
+// const odds = Object.values(game.odds);
+// console.log(odds);
+// let avg = 0;
+// for (const odd of odds) avg += odd;
+// console.log(`average is ${avg / odds.length}`);
+
+//3
+// const odds = Object.entries(game.odds);
+// for (const [team, odd] of odds) {
+//   const teamStr = team === 'x' ? `draw` : `victory ${game[team]}`;
+//   console.log(`Odd of ${teamStr}: ${odd}`);
+// }
+// const scorers = {};
+// for (const player of game.scored) {
+//   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+// }
+// console.log(scorers);
+
+//Bonus
+// const gameScorers = {};
+// for (const player of game.scored) {
+//   gameScorers[player] ? gameScorers[player]++ : (gameScorers[player] = 1);
+// }
+// console.log(gameScorers);
