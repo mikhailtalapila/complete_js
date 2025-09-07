@@ -835,3 +835,355 @@ BONUS: Create an object called 'scorers' which contains the names of the players
 //   gameScorers[player] ? gameScorers[player]++ : (gameScorers[player] = 1);
 // }
 // console.log(gameScorers);
+
+//Recursion - function that calls itself
+
+// var hanoi = function hanoi(disc, src, aux, dst) {
+//   if (disc > 0) {
+//     hanoi(disc - 1, src, dst, aux);
+//     console.log(`Move disc ${disc} from ${src} to ${dst}`);
+//     hanoi(disc - 1, aux, src, dst);
+//   }
+// };
+//
+// hanoi(3, 'Src', 'Aux', 'Dst');
+
+// var walk_the_DOM = function walk(node, func) {
+//   func(node);
+//   node = node.firstChild;
+//   while (node) {
+//     walk(node, func);
+//     node = node.nextSibling;
+//   }
+// };
+//
+// var getElementsByAttribute = function (att, value) {
+//   var results = [];
+//   walk_the_DOM(document.body, function (node) {
+//     var actual = node.nodeType === 1 && node.getAttribute(att);
+//     if (
+//       typeof actual === 'string' &&
+//       (actual === value || typeof value !== 'string')
+//     ) {
+//       results.push(node);
+//     }
+//   });
+//   return results;
+// };
+
+// var factorial = function factorial(i, a) {
+//   a = a || 1;
+//   if (i < 2) {
+//     return a;
+//   }
+//   return factorial(i - 1, a * i);
+// };
+// console.log(factorial(4));
+
+// const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Pasta', 'Pizza']);
+// console.log(ordersSet);
+// const setOfLetters = new Set('Mikhail');
+// console.log(setOfLetters);
+// console.log(setOfLetters.size);
+// console.log(setOfLetters.has('i'));
+// setOfLetters.add('zz');
+// setOfLetters.delete('zz');
+// // setOfLetters.clear();
+// console.log(setOfLetters);
+
+// const staff = ['waiter', 'chef', 'waiter', 'manager', 'chef'];
+// const staffUnique = [...new Set(staff)];
+// //console.log(staffUnique);
+// const uniquePositions = new Set(staff).size;
+// console.log(uniquePositions);
+// const italianFoods = new Set([
+//   'pasta',
+//   'gnocchi',
+//   'tomatoes',
+//   'olive oil',
+//   'garlic',
+//   'basil',
+// ]);
+// const mexicanFoods = new Set([
+//   'tortillas',
+//   'beans',
+//   'rice',
+//   'tomatoes',
+//   'avocado',
+//   'garlic',
+// ]);
+
+// const commonFoods = italianFoods.intersection(mexicanFoods);
+//
+// console.log(`Intersection:`, commonFoods);
+// console.log([...commonFoods]);
+//
+// const allFoods = italianFoods.union(mexicanFoods);
+// console.log(`All foods`, allFoods);
+// console.log([...allFoods]);
+//
+// console.log([...new Set([...mexicanFoods, ...italianFoods])]);
+//
+//
+
+// const uniqueItalian = italianFoods.difference(mexicanFoods);
+// console.log(uniqueItalian);
+//
+// const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
+// console.log(uniqueMexicanFoods);
+//
+// const uniqueItalianAndMexicanFood =
+//   italianFoods.symmetricDifference(mexicanFoods);
+// console.log(uniqueItalianAndMexicanFood);
+//
+//
+// console.log(italianFoods.isDisjointFrom(mexicanFoods));
+
+// const rest = new Map();
+// rest.set('name', 'Classic Italian');
+// rest.set(1, 'Jersey');
+// rest.set(2, 'new York');
+// console.log(rest.set(3, 'connecticut'));
+// rest
+//   .set('categories', ['italain', 'spanish'])
+//   .set('test', 'test1, test2, test3')
+//   .set('arrays', [1, 2, 3, 4]);
+// console.log(rest);
+// rest.get(1);
+// const time = 21;
+// rest.set(true, 'yes we are open');
+// rest.set('open', 11);
+// rest.set('close', 23);
+// rest.set(false, 'no we are closed');
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// console.log(rest.has('categories'));
+// rest.delete(2);
+// console.log(rest.size);
+// const arr = [1, 2, 3];
+// rest.set(arr, 'test');
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
+// console.log(rest.get(arr));
+// const question = new Map([
+//   ['question', 'what is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'Javascript'],
+//   ['correct', 3],
+//   [true, 'Correct'],
+//   [false, 'Try again'],
+// ]);
+// console.log(question);
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') {
+//     console.log(`${key}: ${value}`);
+//   }
+// }
+// //const answer = Number(prompt(`pick your answer`));
+// const answer = 2;
+// // console.log(answer);
+// if (answer === question.get('correct')) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+// console.log([...question]);
+// console.log(question.entries());
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+//const events = [...new Set(gameEvents.values())];
+//console.log(events);
+//
+//1
+// const events = new Set(gameEvents.values());
+// console.log(events);
+
+//2
+//gameEvents.delete(64);
+//console.log(gameEvents);
+//
+
+//3
+//const time = [...gameEvents.keys()].pop();
+//console.log(time);
+//console.log(
+//  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+//);
+//console.log(
+//  `An event happened, on average, every ${time / gameEvents.size} minutes`
+//);
+//
+//
+
+//4
+// for (const [min, event] of gameEvents) {
+//   const halfStr = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${halfStr} HALF] ${min}: ${event}`);
+// }
+
+// const plane = 'A320';
+//
+// console.log(plane[0]);
+// console.log('B737'[0]);
+// console.log(airLine.length);
+//
+// console.log(airLine.indexOf('r'));
+// console.log(airLine.lastIndexOf('r'));
+// console.log(airLine.indexOf('Portugal'));
+//
+// console.log(airLine.slice(4));
+// console.log(airLine.slice(4, 7));
+//
+// console.log(airLine.slice(0, airLine.indexOf(' ')));
+// console.log(airLine.slice(airLine.lastIndexOf(' ')));
+//
+// console.log(airLine.slice(-2));
+// console.log(airLine.slice(1, -1));
+//
+// const checkMiddleSeat = function (seat) {
+//   const s = seat.slice(-1);
+//   if (s === 'B' || s === 'E') console.log(`You got the middle seat`);
+//   else console.log(`you got lucky `);
+// };
+// checkMiddleSeat('23C');
+// checkMiddleSeat('23E');
+// checkMiddleSeat('11B');
+//
+// console.log(new String('jonas'));
+//
+//const airLine = 'TAP Air Portugal';
+//console.log(airLine.toLowerCase());
+//const passenger = 'jOnaS';
+// const passengerTolower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerTolower[0].toUpperCase() + passengerTolower.slice(1);
+// console.log(passengerCorrect);
+// function fixCapitalization(name) {
+//   const lc = name.toLowerCase();
+//   const correctName = lc[0].toUpperCase() + lc.slice(1);
+//   return correctName;
+// }
+// // console.log(fixCapitalization('mikHaIL'));
+// const email = 'hello@jonas.il';
+// const loginEmail = '  hello@Jonas.IL \n';
+//
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+// console.log(trimmedEmail);
+// const normalizedEmail = loginEmail.toLowerCase().trim();
+// console.log(normalizedEmail);
+// console.log(email === normalizedEmail);
+//
+// const airLine = 'TAP Air Portugal';
+//
+// const priceGB = '288,97$';
+// const priceUS = priceGB.replace('$', '%').replace(',', '.');
+// console.log(priceUS);
+//
+// const announcement =
+//   'All passengers come to boarding door 23. Boarding door 23';
+// console.log(announcement.replaceAll('door', 'gate'));
+//
+
+// const announcement =
+//   'All passengers come to boarding door 23. Boarding door 23';
+// console.log(announcement.replace(/door/g, 'gate'));
+//
+//
+
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('A320'));
+// console.log(plane.includes('Boeing'));
+// console.log(plane.startsWith('Air'));
+//
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('new plane family');
+// }
+//
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('you are not allowed to board');
+//   } else {
+//     console.log('welcome aboard');
+//   }
+// };
+//
+// checkBaggage('I have a laptop food pocket Knife');
+// checkBaggage('socks and camera');
+// checkBaggage('got some snacks and gun for protection');
+
+// console.log(`a+very+nice+string`.split('+'));
+// console.log('mikhail test'.split(' '));
+//
+// const [firstName, lastName] = 'mikhail test'.split(' ');
+// const newName = ['Mr', firstName, lastName.toUpperCase()].join(' ');
+// console.log(newName);
+//
+// const capitalizeName = function (name) {
+//   let names = name.split(' ');
+//   const namesUpper = [];
+//   for (const n of names) {
+//     namesUpper.push(n[0].toUpperCase() + n.slice(1));
+//   }
+//   console.log(namesUpper.join(' '));
+// };
+// const passenger = 'Mikhail and Tammy test';
+// capitalizeName('test smith');
+// capitalizeName(passenger);
+
+// const message = 'Go to Gate 23';
+// console.log(message.padStart(25, '+'));
+// console.log('Mikhail'.padStart(25, '+'));
+// console.log(message.padEnd(25, '+'));
+// console.log('Mikhail'.padEnd(25, '+'));
+
+// const maskCreditCard = function (number) {
+//   const str = number + '';
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+//
+// console.log(maskCreditCard(1234567812345678));
+// console.log(maskCreditCard('12345432123423412123'));
+//
+
+// const message2 = 'Bad weather... All departures delayed';
+// console.log(message2.repeat(5));
+//
+// const planesInLine = function (n) {
+//   console.log(`there are ${n} planes in line ${'--> '.repeat(n)}`);
+// };
+// planesInLine(5);
+// planesInLine(2);
+//
