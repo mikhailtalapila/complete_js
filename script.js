@@ -304,14 +304,30 @@ GOOD LUCK 😀
 // f();
 //
 
-const boardPassengers = function (n, wait) {
-  const perGroup = n / 3;
-  setTimeout(function () {
-    console.log(`we are now boarding all ${n} passengers`);
-    console.log(`there are 3 groups each with ${perGroup} passengers`);
-  }, 1000 * wait);
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
+//   setTimeout(function () {
+//     console.log(`we are now boarding all ${n} passengers`);
+//     console.log(`there are 3 groups each with ${perGroup} passengers`);
+//   }, 1000 * wait);
+//
+//   console.log(`will start boarding in ${wait} seconds`);
+// };
+//
+// boardPassengers(180, 3);
 
-  console.log(`will start boarding in ${wait} seconds`);
-};
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
+//   document.querySelector('body').addEventListener('click', function () {
+//     header.style.color = 'blue';
+//   });
+// })();
 
-boardPassengers(180, 3);
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'yellow';
+//   document.querySelector('body').addEventListener('click', function () {
+//     header.style.color = 'purple';
+//   });
+// })();
