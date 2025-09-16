@@ -225,29 +225,93 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
 */
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
-  answers: new Array(4).fill(0),
-  registerNewAnswer: function () {
-    let q = this.question + '\n';
-    for (const answer of this.options) q += answer + '\n';
-    console.log(q);
-    const a = prompt(q);
-    if (a !== '1' && a !== '2' && a !== '0' && a !== '3')
-      console.error('Invalid input');
-    else this.answers[Number(a)]++;
-    this.displayResults('string');
-  },
-  displayResults: function (type = 'array') {
-    if (type === 'array') console.log(this.answers);
-    if (type === 'string') {
-      let output = 'Poll results are ';
-      for (const a in this.answers) output += a + ', ';
-      console.log(output.slice(0, -2));
-    }
-  },
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
+//   answers: new Array(4).fill(0),
+//   registerNewAnswer() {
+//     let q = this.question + '\n';
+//     for (const answer of this.options) q += answer + '\n';
+//     this.options.join('\n');
+//
+//     console.log(q);
+//     const a = Number(prompt(q));
+//     if (a !== '1' && a !== '2' && a !== '0' && a !== '3')
+//       console.error('Invalid input');
+//     else this.answers[Number(a)]++;
+//     this.displayResults('string');
+//   },
+//   displayResults(type = 'array') {
+//     if (type === 'array') console.log(this.answers);
+//     if (type === 'string') {
+//       let output = 'Poll results are ';
+//       this.answers.join(',');
+//       for (const a in this.answers) output += a + ', ';
+//       console.log(output.slice(0, -2));
+//     }
+//   },
+// };
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+//
+// poll.displayResults.call({ answers: [4, 2, 4] }, 'string');
+//
+
+// const runOnce = function () {
+//   console.log(`this will never run again`);
+// };
+//runOnce();
+// (function () {
+//   console.log('this will run once');
+// })();
+// (() => console.log('will never run again'))();
+//
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+//
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+//
+// console.dir(booker);
+//
+
+// let f;
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
+//
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
+// g();
+// f();
+// h();
+// f();
+//
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`we are now boarding all ${n} passengers`);
+    console.log(`there are 3 groups each with ${perGroup} passengers`);
+  }, 1000 * wait);
+
+  console.log(`will start boarding in ${wait} seconds`);
 };
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+boardPassengers(180, 3);
