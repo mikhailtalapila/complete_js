@@ -7,7 +7,10 @@
 // Data
 const account1 = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [
+    200, 450, -400, 3000, -650, -130, 70, 1300, 1500, 123, 1235, 1234, -500,
+    -700, -989,
+  ],
   interestRate: 1.2, // %
   pin: 1111,
 };
@@ -61,6 +64,25 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+        <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+          <div class="movements__value">${mov}</div>
+        </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+// console.log(containerMovements.innerHTML);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -104,7 +126,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // console.log('jonas'.at(1));
 // console.log('jonas'.at(-1));
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // for (const [i, movement] of movements.entries()) {
 //   // for (const movement of movements) {
 //   if (movement > 0) console.log(`Movement ${i} you deposited ${movement}`);
@@ -131,3 +152,39 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // currenciesUnique.forEach(function (value, _, set) {
 //   console.log(`${value} ${value}`);
 // });
+
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   let dogsJuliaCopy = dogsJulia.slice(1);
+//   dogsJuliaCopy = dogsJuliaCopy.slice(0, dogsJuliaCopy.length - 1);
+//   // console.log(dogsJuliaCopy);
+//   const combined = [...dogsKate, ...dogsJuliaCopy];
+//   // console.log(combined);
+//   combined.forEach(function (dog, i) {
+//     if (dog < 3) console.log(`Dog number ${i + 1} is still a puppy`);
+//     else
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//   });
+// };
+// const dogsJulia = [3, 5, 2, 12, 7];
+// const dogsKate = [4, 1, 15, 8, 3];
+// checkDogs(dogsJulia, dogsKate);
+// const data1 = [9, 16, 6, 8, 3];
+// const data2 = [10, 5, 6, 1, 4];
+// checkDogs(data1, data2);
+//
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const EuToUsd = 1.1;
+const movementsUsd = movements.map(el => el * EuToUsd);
+console.log(movements);
+console.log(movementsUsd);
+
+let movementsUsdFor = [];
+for (const mov of movements) {
+  movementsUsdFor.push(mov * EuToUsd);
+}
+console.log(movementsUsdFor);
+const movementsDescriptions = movements.map((mov, i, array) => {
+  return `you ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`;
+});
+console.log(movementsDescriptions);
