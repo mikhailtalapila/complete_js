@@ -260,7 +260,9 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 //     else return 16 + el * 4;
 //   });
 // };
-// const dogAges1 = [5, 2, 4, 1, 15, 8, 3];
+const dogAges1 = [5, 2, 4, 1, 15, 8, 3];
+const dogAges2 = [16, 6, 10, 5, 6, 1, 4];
+
 // const humanAges = calcAverageHumanAge(dogAges1);
 // const filtered = humanAges.filter(el => el > 18);
 // const totalAge = filtered.reduce(function (acc, curr) {
@@ -269,8 +271,59 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 // const average = filtered.reduce((acc, curr, i, arr) => {
 //   return acc + curr / arr.length;
 // }, 0);
+
+// const calcAverageHumanAge = function (ages) {
+//   const average = ages
+//     .map(el => (el <= 2 ? el * 2 : 16 + el * 4))
+//     .filter(el => el > 18)
+//     .reduce((acc, el, i, arr) => {
+//       acc + el / arr.length;
+//     }, 0);
+//   return average;
+// };
+//
+
+// const calculateAverageArrFunction = ages =>
+//   ages
+//     .map(el => (el <= 2 ? el * 2 : 16 + el * 4))
+//     .filter(el => el > 18)
+//     .reduce((acc, el, i, arr) => acc + el / arr.length, 0);
+//
+// console.log(calculateAverageArrFunction(dogAges1));
+// console.log(calculateAverageArrFunction(dogAges2));
+// console.log(calcAverageHumanAge(dogAges1));
 // console.log(`total is ${totalAge}`);
 // console.log(`average is ${totalAge / filtered.length}`);
 // console.log(`another average is ${average}`);
 // console.log(humanAges);
 // console.log(filtered);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eurToUsd = 1.1;
+// const total = movements
+//   .filter(el => el > 0)
+//   .map((el, i, arr) => {
+//     // console.log(arr);
+//     return el * eurToUsd;
+//   })
+//   //.map(el => el * eurToUsd)
+//   .reduce((acc, curr) => acc + curr, 0);
+// // console.log(total);
+//
+// const calcDisplaySummary = function (movements) {
+//   const incomes = movements
+//     .filter(mov => mov > 0)
+//     .reduce((acc, mov) => acc + mov);
+//   labelSumIn.textContent = `${incomes}$`;
+//   const out = movements.filter(el => el < 0).reduce((acc, mov) => acc + mov);
+//   labelSumOut.textContent = `${Math.abs(out)}$`;
+//   const interest = movements
+//     .filter(mov => mov > 0)
+//     .map(deposit => (deposit * 1.2) / 100)
+//     .filter((int, i, arr) => {
+//       //console.log(arr);
+//       return int >= 1;
+//     })
+//     .reduce((acc, int) => acc + int, 0);
+//   labelSumInterest.textContent = `$${interest}`;
+// };
+// calcDisplaySummary(movements);
