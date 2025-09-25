@@ -327,3 +327,72 @@ const dogAges2 = [16, 6, 10, 5, 6, 1, 4];
 //   labelSumInterest.textContent = `$${interest}`;
 // };
 // calcDisplaySummary(movements);
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const withdrawal = movements.find(mov => mov < 0);
+console.log(withdrawal);
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [
+    200, 450, -400, 3000, -650, -130, 70, 1300, 1500, 123, 1235, 1234, -500,
+    -700, -989,
+  ],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+const createUsernames = function (accts) {
+  accts.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(el => el[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
+for (let account of accounts) {
+  if (account.owner === 'Jessica Davis') console.log(account);
+}
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    console.log('LOGged in');
+    labelWelcome.textContent = `welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+  }
+  e.preventDefault();
+});
