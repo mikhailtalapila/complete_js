@@ -466,3 +466,30 @@ btnClose.addEventListener('click', function (e) {
 //  console.log(movements.every(largeDeposit));
 //  console.log(accounts[3].movements.every(largeDeposit));
 //  console.log(accounts[3].movements.some(largeDeposit));
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+//
+// const arrDepp = [[[1, 2], 3], [[3, 4], 5], 5, 6];
+// console.log(arrDepp);
+//
+// console.log(arrDepp.flat(2));
+
+// console.log(accounts);
+//
+// const accountMovements = accounts.map(acc => (acc.movements = movements));
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+//
+// const overallBalance2 = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance2);
+//
+// const overallBalance3 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance3);
