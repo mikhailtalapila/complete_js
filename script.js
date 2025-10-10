@@ -440,6 +440,16 @@ btnClose.addEventListener('click', function (e) {
   }
 });
 
+const displayMovements = function (movement, sort = false) {
+  const movs = sort ? movement.slice().sort((a, b) => {}) : movement;
+};
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  sorted = !sorted;
+  displayMovements(currentAccount.movements, !sorted);
+});
+
 // console.log(movements);
 // const lastWithdrawal = movements.findLast(mov => mov < 0);
 // console.log(lastWithdrawal);
@@ -551,6 +561,22 @@ const breeds = [
     activities: ['agility', 'fetch'],
   },
 ];
+// console.log(
+//   movements.sort((a, b) => {
+//     if (a > b) return 1;
+//     if (a < b) return -1;
+//   })
+// );
+// console.log(
+//   movements.sort((a, b) => {
+//     if (a > b) return -1;
+//     if (a < b) return 1;
+//   })
+// );
+// console.log(movements.sort((a, b) => a - b));
+// console.log(movements);
+// console.log(movements.sort((a, b) => b - a));
+// console.log(movements);
 //#1
 // const huskyWeight = breeds.find(b => b.breed === 'Husky').averageWeight;
 // console.log(huskyWeight);
@@ -649,3 +675,14 @@ const breeds = [
 //       .map(breed => breed.averageWeight)
 //   )}`
 // );
+console.log(movements);
+
+const groupedMovements = Object.groupBy(movements, el =>
+  el > 0 ? 'deposits' : 'withdrawals'
+);
+console.log(groupedMovements);
+
+const newGroupedMovements = Object.groupBy(movements, el =>
+  el > 0 ? 'deposits' : 'withdr'
+);
+console.log(newGroupedMovements);
