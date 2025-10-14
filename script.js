@@ -340,6 +340,7 @@ const account1 = {
   ],
   interestRate: 1.2, // %
   pin: 1111,
+  type: 'premium',
 };
 
 const account2 = {
@@ -347,6 +348,7 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  type: 'premium',
 };
 
 const account3 = {
@@ -354,6 +356,7 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
+  type: 'premium',
 };
 
 const account4 = {
@@ -361,6 +364,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
+  type: 'standard',
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -675,14 +679,152 @@ const breeds = [
 //       .map(breed => breed.averageWeight)
 //   )}`
 // );
-console.log(movements);
+// console.log(movements);
+//
+// const groupedMovements = Object.groupBy(movements, el =>
+//   el > 0 ? 'deposits' : 'withdrawals'
+// );
+// console.log(groupedMovements);
+//
+// const newGroupedMovements = Object.groupBy(movements, el =>
+//   el > 0 ? 'deposits' : 'withdr'
+// );
+// console.log(newGroupedMovements);
+//
+// const groupedByActivity = Object.groupBy(accounts, account => {
+//   const movementCount = account.movements.length;
+//   if (movementCount >= 8) return 'Very active';
+//   if (movementCount >= 4) return 'Active';
+//   if (movementCount >= 1) return 'Moderate';
+//   return 'inactive';
+// });
+// console.log(groupedByActivity);
+//
+// const typeCounts = Object.groupBy(accounts, account => account.type);
+// console.log(typeCounts);
+//
+// const groupedAccounts = Object.groupBy(accounts, ({ type }) => type);
+// console.log(groupedAccounts);
+//
 
-const groupedMovements = Object.groupBy(movements, el =>
-  el > 0 ? 'deposits' : 'withdrawals'
-);
-console.log(groupedMovements);
+// const groupedAccounts = Object.groupBy(accounts, account => account.type);
+// console.log(groupedAccounts);
+//
+// const groupedDestructAccounts = Object.groupBy(accounts, ({ type }) => type);
+// console.log(groupedDestructAccounts);
 
-const newGroupedMovements = Object.groupBy(movements, el =>
-  el > 0 ? 'deposits' : 'withdr'
-);
-console.log(newGroupedMovements);
+// const arr = [3, 3, 3, 3, 3, 3, 3, 3];
+//
+// const x = new Array(7);
+// console.log(x);
+//
+// //console.log(x.map(() => 4));
+// // x.fill(1);
+// x.fill(1, 3, 5);
+// arr.fill(23, 5);
+// console.log(arr);
+// console.log(x);
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+// const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+// console.log(z);
+// let desiredLength = 10;
+// const z1 = Array.from({ length: desiredLength }, (_, i) => {
+//   desiredLength--;
+//   return desiredLength + 1;
+// });
+// console.log(z1);
+//
+// labelBalance.addEventListener('click', function (e) {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value')
+//   );
+//
+//   console.log(movementsUI.map(el => el.textContent.replace('$', '')));
+//   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+// });
+
+// console.log(movements);
+// const reversedMovements = movements.slice().reverse();
+// const rev = movements.toReversed();
+// console.log(reversedMovements);
+// console.log(rev);
+
+//tosorted (sort), toSpliced (splice);
+// console.log(movements);
+// // movements[1] = 2000;
+// const newMovements = movements.with(1, 2500);
+// console.log(newMovements);
+// console.log(movements);
+
+//to mutate the original
+// add to orginal
+//.push //unshift
+//remove from original
+// .pop .shift .splice
+
+//others
+//reverse sort fill
+
+///new array bbased on the original
+// .map same as original (loop)
+
+//filter the condition .filter
+
+//taking portion of original
+// .slice
+
+//with one item replaced:
+// .with
+
+//flattened
+// .flat.  .flatMap
+// new toreverse tosorted tosplice .concat
+
+/// an array index
+//based on value. -- indexof
+
+//based on test condition
+//findIndex findLastIndex
+
+//an array element based on test condition
+//.find .findLast
+
+//based on position
+//.at
+//=== know if array includes
+// based on value
+//.includes
+//
+//based on test condition
+//.some
+//.every
+//
+//
+
+// a new string
+// .join
+//
+// to transform to value
+// based on accumulator
+// .reduce
+
+// to just loop over the Array
+//.forEach (does not create a new value)
+
+// grouping
+// Object.groupBy
+//
+//
+// to create a new array from scratch
+// Array.from
+//create a new array with n empty positions (use together with .fill method)
+// console.log(new Array(13).fill(1));
+
+//joining 2 or more arrays
+//[...movements, ...movements] [...array1, ...array2]
+// create a new array containing unique values from array
+// [...new Set(arr)]
+
+//creating a new array containning unique elements that are present in both arr1 and arr2
+// [...new Set(arr1).intersection(new Set(arr2))]
