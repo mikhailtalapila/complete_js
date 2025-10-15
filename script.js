@@ -828,3 +828,65 @@ const breeds = [
 
 //creating a new array containning unique elements that are present in both arr1 and arr2
 // [...new Set(arr1).intersection(new Set(arr2))]
+
+// const bankDepositSum = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((sum, cur) => sum + cur, 0);
+// console.log(bankDepositSum);
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+// console.log(numDeposits1000);
+
+// const numDepositsOf1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, current) => (current >= 1000 ? count + 1 : count), 0);
+// console.log(numDepositsOf1000);
+// console.log(
+//   accounts
+//     .flatMap(account => account.movements)
+//     .reduce((count, curr) => (curr >= 1000 ? count + 1 : count), 0)
+// );
+
+// const numberOfDepositsOver1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+// console.log(numberOfDepositsOver1000);
+//
+
+// let a = 10;
+// console.log(++a);
+//
+// const numWith1000s = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((counter, curr) => (curr >= 1000 ? ++counter : counter), 0);
+// console.log(numWith1000s);
+
+// const { deposits, withdrawals } = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, curr) => {
+//       // curr > 0 ? (sums.deposits += curr) : (sums.withdrawals += curr);
+//       sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+//
+// console.log(deposits, withdrawals);
+
+// const convertTitleCase = function (title) {
+//   const capitalize = str => str[0].toUpperCase() + str.slice(1);
+//   const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and'];
+//   const titleCase = title
+//     .toLowerCase()
+//     .split(' ')
+//     .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+//     .join(' ');
+//   return capitalize(titleCase);
+// };
+// console.log(convertTitleCase('this is a title'));
+// console.log(convertTitleCase('and this is a title'));
+// console.log(convertTitleCase('and this is a title and that is another title'));
