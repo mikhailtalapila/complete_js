@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,7 +104,7 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.round(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -263,3 +263,28 @@ btnSort.addEventListener('click', function (e) {
 //
 // console.log(Number.isInteger('20.8'));
 //
+// console.log(Math.sqrt(49));
+// console.log(25 ** (1 / 2));
+// console.log(8 ** (1 / 3));
+// console.log(Math.max(2, 3, 4, 3, 2, '23'));
+// console.log(Math.min(2, 3, 4, 5, 5));
+// console.log(Math.PI * Number.parseFloat('10px') ** 2);
+// console.log(Math.trunc(Math.random() * 6) + 1);
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1)) + min;
+//
+// console.log(randomInt(10, 20));
+// console.log(randomInt(0, 3));
+//
+// console.log(Math.trunc(23.34233));
+// console.log(Math.round(23.68));
+// console.log(Math.ceil(23.23));
+// console.log(Math.floor(23.23));
+// console.log(Math.floor('23.2343'));
+// // floor and trunc are the same for POSITIVE numbers but not for the negative numbers.
+// console.log((2.9).toFixed());
+// console.log((2.9).toFixed(3));
+// console.log((2.2329).toFixed(2));
+
+// console.log(Math.PI.toFixed(4));
+// console.log(+Math.PI.toFixed(3) + 4.2);
