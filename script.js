@@ -288,3 +288,17 @@ btnSort.addEventListener('click', function (e) {
 
 // console.log(Math.PI.toFixed(4));
 // console.log(+Math.PI.toFixed(3) + 4.2);
+// console.log(5 % 2);
+// console.log(6 % 2);
+//
+// const isEven = num => num % 2 === 0;
+// console.log(isEven(43));
+//
+// labelBalance.addEventListener('click', function () {
+//   [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+//     if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+//     if (i % 3 === 0) row.style.backgroundColor = 'blue';
+//   });
+// });
+
+//remainder operator
