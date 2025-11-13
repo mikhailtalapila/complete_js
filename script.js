@@ -302,3 +302,13 @@ btnSort.addEventListener('click', function (e) {
 // });
 
 //remainder operator
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const priceCents = 345_99;
+console.log(priceCents);
+
+const transferFee = 23_00;
+
+const PI = 3.14_15;
+console.log(PI);
