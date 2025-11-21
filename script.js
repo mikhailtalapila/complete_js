@@ -401,3 +401,5 @@ btnSort.addEventListener('click', function (e) {
 // console.log(future.setFullYear(2025));
 // console.log(future);
 //
+setTimeout(() => console.log('Here is your pizza'), 2 * 1000);
+console.log('waiting...');
