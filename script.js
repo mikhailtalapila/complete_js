@@ -168,7 +168,24 @@ const updateUI = function (acc) {
   // Display summary
   calcDisplaySummary(acc);
 };
-
+const startLogoutTimer = function () {
+  // set time to 5 minutes
+  let time = 10;
+  // call the timer every second
+  const timer = setInterval(function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const seconds = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${seconds}`;
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Login to get started`;
+      containerApp.style.opacity = 0;
+    }
+  }, 1000);
+  // in each call print the remaining time to ui
+  time--;
+  // when 0, stop timer and logn out user
+};
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
@@ -204,7 +221,7 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-
+    startLogoutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -241,14 +258,16 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.round(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // add transfer date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // add transfer date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 3000);
   }
   inputLoanAmount.value = '';
 });
@@ -410,3 +429,9 @@ btnSort.addEventListener('click', function (e) {
 // );
 // console.log('waiting...');
 // if (ingragients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval(function () {
+//   const now = new Date();
+//   console.log(now);
+// }, 3000);
+//
