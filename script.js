@@ -401,5 +401,12 @@ btnSort.addEventListener('click', function (e) {
 // console.log(future.setFullYear(2025));
 // console.log(future);
 //
-setTimeout(() => console.log('Here is your pizza'), 2 * 1000);
-console.log('waiting...');
+
+// const ingragients = ['olives', 'spinach', 'cheeses'];
+// const pizzaTimer = setTimeout(
+//   () => console.log(`Here is your pizza ${ingragients[0]} ${ingragients[1]}`),
+//   2 * 1000,
+//   ...ingragients
+// );
+// console.log('waiting...');
+// if (ingragients.includes('spinach')) clearTimeout(pizzaTimer);
