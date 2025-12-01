@@ -28,3 +28,22 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+document.documentElement.style.setProperty('--color-primary', 'green');
+const logo = document.querySelector('.nav__logo');
+console.log(logo.src);
+
+logo.alt = 'hello';
+console.log(logo.alt);
+logo.setAttribute('company', 'test company');
+console.log(logo.getAttribute('designer'));
+console.log(logo.getAttribute('company'));
+
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+//data attributes
+console.log(logo.dataset.versionNumber);
