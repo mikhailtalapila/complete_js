@@ -31,6 +31,27 @@ Person.prototype.calcAge = function () {
 // console.log(Person.prototype.isPrototypeOf(Person));
 //
 // Person.prototype.species = 'Homo Sapiens';
-// console.log(john.species);
-// console.log(john.hasOwnProperty('species'));
-// console.log(john.hasOwnProperty('firstName'));
+// // console.log(john.species);
+// // console.log(john.hasOwnProperty('species'));
+// // console.log(john.hasOwnProperty('firstName'));
+// console.log(john.__proto__);
+// //Object.prototype
+// console.log(john.__proto__.__proto__);
+// console.log(john.__proto__.__proto__.__proto__);
+//
+// console.log(Person.prototype.constructor);
+// const arr = [1, 2, 3, 34, 23, 34, 4];
+// console.log(arr.__proto__ === Array.prototype);
+// console.log(arr.__proto__.__proto__);
+// Array.prototype.unique = function () {
+//   return [...new Set(this)];
+// };
+// console.log(arr.unique());
+//
+// const array1 = [1, 1, 2, 3, 3, 4, 4, 6, 1];
+// Array.prototype.unique2 = function () {
+//   return [...new Set(this)];
+// };
+// console.log(array1.unique2());
+// const h1 = document.querySelector('h1');
+// console.log(x => x + 1);
