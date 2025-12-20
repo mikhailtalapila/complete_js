@@ -88,31 +88,66 @@
 //class declaration
 
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this._fullName = fullName;
     this.birthYear = birthYear;
   }
   calcAge() {
     console.log(2038 - this.birthYear);
   }
   greet = function () {
-    console.log(`hey ${this.firstName}`);
+    console.log(`hey ${this._fullName}`);
   };
   sayGoodbye() {
-    console.log(`goodbye ${this.firstName}`);
+    console.log(`goodbye ${this._fullName}`);
+  }
+  get age() {
+    return 2038 - this.birthYear;
+  }
+  set bornIn(year) {
+    this.birthYear = year;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`given name is not full name`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
   }
 }
 
-const jessica = new PersonCl('Jessica', 1999);
-console.log(jessica);
-jessica.calcAge();
-
-// PersonCl.prototype.greet = function () {
-//   console.log(`hey ${this.firstName}`);
+// const jessica = new PersonCl('Jessica Smith', 1999);
+// jessica.bornIn = 2005;
+// console.log(jessica.fullName);
+// jessica.fullName = 'john';
+// console.log(jessica);
+// jessica.calcAge();
+// console.log(jessica.age);
+//
+// // PersonCl.prototype.greet = function () {
+// //   console.log(`hey ${this.firstName}`);
+// // };
+// jessica.greet();
+// console.log(jessica.hasOwnProperty('greet'));
+// console.log(jessica.hasOwnProperty('calcAge'));
+// //1. classes are not hoisted
+// //2. classes are first-class citizens
+// //3. classes are executed in strict mode
+// const account = {
+//   owner: 'Mike',
+//   movements: [1, 2, 3, 4, 4],
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
 // };
-jessica.greet();
-console.log(jessica.hasOwnProperty('greet'));
-console.log(jessica.hasOwnProperty('calcAge'));
-//1. classes are not hoisted
-//2. classes are first-class citizens
-//3. classes are executed in strict mode
+// account.latest = 40;
+// console.log(account.latest);
+//
+// const walter = new PersonCl('Walter', 1038);
+//
