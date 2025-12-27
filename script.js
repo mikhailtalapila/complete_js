@@ -1,8 +1,20 @@
 'use strict';
-// const Person = function (firstName, birthYear) {
-//   this.firstName = firstName;
-//   this.birthYear = birthYear;
-// };
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.hey = function () {
+  console.log('Hey there');
+};
+
+const Car = function (make, model, year) {
+  this._make = make;
+};
+Car.makeSound = function () {
+  console.log('beep - beep');
+};
+const bmw = new Car('bmw', '333', 1992);
 //
 // const mike = new Person('Mike', 1999);
 // console.log(mike);
@@ -87,6 +99,35 @@
 // }
 //class declaration
 
+class Vehicle {
+  constructor(make, speed) {
+    this._make = make;
+    this._speed = speed;
+  }
+  accelerate() {
+    this._speed += 10;
+    console.log(`Going at ${this._speed} km/h`);
+  }
+  brake() {
+    this._speed -= 10;
+    console.log(`Going at ${this._speed} km/h`);
+  }
+  get speedUs() {
+    return this._speed / 1.6;
+  }
+  set speedUs(speed) {
+    this._speed = speed * 1.6;
+  }
+}
+
+const ford = new Vehicle('Ford', 120);
+ford.accelerate();
+ford.brake();
+console.log(ford.speedUs);
+ford.speedUs = 100;
+console.log(ford.speedUs);
+console.log(ford._speed);
+
 class PersonCl {
   constructor(fullName, birthYear) {
     this._fullName = fullName;
@@ -117,7 +158,28 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+  static hey() {
+    console.log('hello from class');
+  }
 }
+
+const PersonProto = {
+  calcAge() {
+    console.log(2028 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+//
+// const sara = Object.create(PersonProto);
+// sara.init('sarah', 1988);
+// sara.calcAge();
 
 // const jessica = new PersonCl('Jessica Smith', 1999);
 // jessica.bornIn = 2005;
