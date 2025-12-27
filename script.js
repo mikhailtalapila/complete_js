@@ -1,20 +1,20 @@
 'use strict';
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
-
-Person.hey = function () {
-  console.log('Hey there');
-};
-
-const Car = function (make, model, year) {
-  this._make = make;
-};
-Car.makeSound = function () {
-  console.log('beep - beep');
-};
-const bmw = new Car('bmw', '333', 1992);
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+//
+// Person.hey = function () {
+//   console.log('Hey there');
+// };
+//
+// const Car = function (make, model, year) {
+//   this._make = make;
+// };
+// Car.makeSound = function () {
+//   console.log('beep - beep');
+// };
+// const bmw = new Car('bmw', '333', 1992);
 //
 // const mike = new Person('Mike', 1999);
 // console.log(mike);
@@ -95,96 +95,96 @@ const bmw = new Car('bmw', '333', 1992);
 
 //class expression
 // const PersonCl = class {
+////
+//// }
+////class declaration
 //
-// }
-//class declaration
-
-class Vehicle {
-  constructor(make, speed) {
-    this._make = make;
-    this._speed = speed;
-  }
-  accelerate() {
-    this._speed += 10;
-    console.log(`Going at ${this._speed} km/h`);
-  }
-  brake() {
-    this._speed -= 10;
-    console.log(`Going at ${this._speed} km/h`);
-  }
-  get speedUs() {
-    return this._speed / 1.6;
-  }
-  set speedUs(speed) {
-    this._speed = speed * 1.6;
-  }
-}
-
-const ford = new Vehicle('Ford', 120);
-ford.accelerate();
-ford.brake();
-console.log(ford.speedUs);
-ford.speedUs = 100;
-console.log(ford.speedUs);
-console.log(ford._speed);
-
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this._fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  calcAge() {
-    console.log(2038 - this.birthYear);
-  }
-  greet = function () {
-    console.log(`hey ${this._fullName}`);
-  };
-  sayGoodbye() {
-    console.log(`goodbye ${this._fullName}`);
-  }
-  get age() {
-    return 2038 - this.birthYear;
-  }
-  set bornIn(year) {
-    this.birthYear = year;
-  }
-  set fullName(name) {
-    if (name.includes(' ')) {
-      this._fullName = name;
-    } else {
-      alert(`given name is not full name`);
-    }
-  }
-  get fullName() {
-    return this._fullName;
-  }
-  static hey() {
-    console.log('hello from class');
-  }
-}
-
-const PersonProto = {
-  calcAge() {
-    console.log(2028 - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-
-const steven = Object.create(PersonProto);
-// steven.name = 'Steven';
-// steven.birthYear = 2002;
+//class Vehicle {
+//  constructor(make, speed) {
+//    this._make = make;
+//    this._speed = speed;
+//  }
+//  accelerate() {
+//    this._speed += 10;
+//    console.log(`Going at ${this._speed} km/h`);
+//  }
+//  brake() {
+//    this._speed -= 10;
+//    console.log(`Going at ${this._speed} km/h`);
+//  }
+//  get speedUs() {
+//    return this._speed / 1.6;
+//  }
+//  set speedUs(speed) {
+//    this._speed = speed * 1.6;
+//  }
+//}
 //
-// const sara = Object.create(PersonProto);
-// sara.init('sarah', 1988);
-// sara.calcAge();
-
-// const jessica = new PersonCl('Jessica Smith', 1999);
-// jessica.bornIn = 2005;
-// console.log(jessica.fullName);
-// jessica.fullName = 'john';
+//const ford = new Vehicle('Ford', 120);
+//ford.accelerate();
+//ford.brake();
+//console.log(ford.speedUs);
+//ford.speedUs = 100;
+//console.log(ford.speedUs);
+//console.log(ford._speed);
+//
+//class PersonCl {
+//  constructor(fullName, birthYear) {
+//    this._fullName = fullName;
+//    this.birthYear = birthYear;
+//  }
+//  calcAge() {
+//    console.log(2038 - this.birthYear);
+//  }
+//  greet = function () {
+//    console.log(`hey ${this._fullName}`);
+//  };
+//  sayGoodbye() {
+//    console.log(`goodbye ${this._fullName}`);
+//  }
+//  get age() {
+//    return 2038 - this.birthYear;
+//  }
+//  set bornIn(year) {
+//    this.birthYear = year;
+//  }
+//  set fullName(name) {
+//    if (name.includes(' ')) {
+//      this._fullName = name;
+//    } else {
+//      alert(`given name is not full name`);
+//    }
+//  }
+//  get fullName() {
+//    return this._fullName;
+//  }
+//  static hey() {
+//    console.log('hello from class');
+//  }
+//}
+//
+//const PersonProto = {
+//  calcAge() {
+//    console.log(2028 - this.birthYear);
+//  },
+//  init(firstName, birthYear) {
+//    this.firstName = firstName;
+//    this.birthYear = birthYear;
+//  },
+//};
+//
+//const steven = Object.create(PersonProto);
+//// steven.name = 'Steven';
+//// steven.birthYear = 2002;
+////
+//// const sara = Object.create(PersonProto);
+//// sara.init('sarah', 1988);
+//// sara.calcAge();
+//
+//// const jessica = new PersonCl('Jessica Smith', 1999);
+//// jessica.bornIn = 2005;
+//// console.log(jessica.fullName);
+//// jessica.fullName = 'john';
 // console.log(jessica);
 // jessica.calcAge();
 // console.log(jessica.age);
@@ -213,3 +213,41 @@ const steven = Object.create(PersonProto);
 //
 // const walter = new PersonCl('Walter', 1038);
 //
+
+const Person = function (firstName, birthYear) {
+  this._firstName = firstName;
+  this._birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2038 - this._birthYear);
+};
+
+// const Car = function (make, model, year) {
+//   this._make = make;
+//   this._model = model;
+//   this._year = year;
+// };
+//
+// Car.prototype.drive = function () {
+//   console.log('driving');
+// };
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this._course = course;
+};
+Student.prototype = Object.create(Person.prototype);
+const mike = new Student('Mike', 2020, 'Computer science');
+console.log(mike);
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this._firstName} and I study ${this._course}`);
+};
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+Student.prototype.constructor = Student;
+console.log(Student.prototype.constructor);
