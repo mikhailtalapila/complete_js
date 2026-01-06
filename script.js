@@ -338,54 +338,120 @@
 //1. public fields
 //2. private fields
 //3. public methods
-//4. private methods
-//5. static version of these 4
+// //4. private methods
+// //5. static version of these 4
+//
+// class Account {
+//   locale = navigator.language;
+//   bank = 'Bankist';
+//   #movements = [];
+//   #pin;
+//   constructor(ownerName, currency, pin) {
+//     this.ownerName = ownerName;
+//     this.currency = currency;
+//     this.#pin = pin;
+//     // this.movements = [];
+//     // this.locale = navigator.language;
+//     console.log(`Thanks for opening an account, ${this.ownerName}`);
+//   }
+//   //public interface of an object (API)
+//   getMovements() {
+//     return this.#movements;
+//   }
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+//   withdraw(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+//
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//     }
+//     return this;
+//   }
+//   //private methods
+//   #approveLoan(val) {
+//     return true;
+//   }
+//   static test() {
+//     console.log('true');
+//   }
+// }
+//
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+// console.log(acc1);
+// // acc1.movements.push(250);
+// // acc1.movements.push(-100);
+// acc1.deposit(1000);
+// acc1.withdraw(30);
+//
 
-class Account {
-  locale = navigator.language;
-  bank = 'Bankist';
-  #movements = [];
-  #pin;
-  constructor(ownerName, currency, pin) {
-    this.ownerName = ownerName;
-    this.currency = currency;
-    this.#pin = pin;
-    // this.movements = [];
-    // this.locale = navigator.language;
-    console.log(`Thanks for opening an account, ${this.ownerName}`);
+// const movements = acc1
+//   .deposit(300)
+//   .withdraw(100)
+//   .withdraw(344)
+//   .requestLoan(2500)
+//   .withdraw(300)
+//   .getMovements();
+// acc1.requestLoan(1000);
+// Account.test();
+//
+// console.log(movements);
+//
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
-  //public interface of an object (API)
-  getMovements() {
-    return this.#movements;
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going ${this.speed}km/h`);
+    return this;
   }
-  deposit(val) {
-    this.#movements.push(val);
+  break() {
+    this.speed -= 5;
+    console.log(`${this.make} i s going at ${this.speed}`);
+    return this;
   }
-  withdraw(val) {
-    this.deposit(-val);
+  get speedUs() {
+    return this.speed / 1.6;
   }
-
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Loan approved`);
-    }
-  }
-  //private methods
-  #approveLoan(val) {
-    return true;
-  }
-  static test() {
-    console.log('true');
+  set speedUs(speed) {
+    this.speed = speed * 1.6;
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
-console.log(acc1);
-// acc1.movements.push(250);
-// acc1.movements.push(-100);
-acc1.deposit(1000);
-acc1.withdraw(30);
+class ELCarCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  chargeBattery(val) {
+    this.#charge = val;
+    return this;
+  }
+  accelerate() {
+    this.#charge--;
+    this.speed += 20;
+    console.log(
+      `${this.make} is now oging ${this.speed} with charge of ${this.#charge}`
+    );
+    return this;
+  }
+}
 
-acc1.requestLoan(1000);
-Account.test();
+const rivian = new ELCarCl('rivia', 120, 23);
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .break()
+  .chargeBattery(50)
+  .accelerate();
+console.log(rivian.speedUs);
