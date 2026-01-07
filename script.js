@@ -16,8 +16,35 @@ if (navigator.geolocation) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       console.log(latitude, longitude);
+      const coords = [latitude, longitude];
 
       console.log(`https://www.google.com/maps/@${longitude},${latitude}`);
+      const map = L.map("map").setView(coords, 15);
+      // console.log(map);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      map.on("click", function (mapEvent) {
+        const { lat, lng } = mapEvent.latlng;
+        console.log(lat);
+        console.log(lng);
+        console.log(mapEvent);
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: "running-popup",
+            })
+          )
+          .setPopupContent("<b>Workout</b>")
+          .openPopup();
+      });
     },
     function () {
       alert("could not get your position");
