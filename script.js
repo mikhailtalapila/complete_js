@@ -10,7 +10,10 @@ const countriesContainer = document.querySelector(".countries");
 
 // // NEW REVERSE GEOCODING API URL (use instead of the URL shown in videos):
 // // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
-
+const renderError = function (message) {
+  countriesContainer.insertAdjacentText("beforeend", message);
+  countriesContainer.style.opacity = 1;
+};
 const renderCountry = function (data, className = "") {
   const html = `
   <article class="country ${className}">
@@ -25,7 +28,7 @@ const renderCountry = function (data, className = "") {
   `;
 
   countriesContainer.insertAdjacentHTML("beforeend", html);
-  countriesContainer.style.opacity = 1;
+  //countriesContainer.style.opacity = 1;
 };
 // const getCountryAndNeighbourData = function (county) {
 //   const request = new XMLHttpRequest();
@@ -68,7 +71,18 @@ const renderCountry = function (data, className = "") {
 
 const getCountyData = function (country) {
   fetch(`https://restcountries.com/v2/name/${country}`)
-    .then((responce) => responce.json())
-    .then((data) => renderCountry(data[0]));
+    .then((response) => response.json())
+    .then((data) => {
+      renderCountry(data[0]);
+    })
+    .catch((err) => {
+      console.log("error");
+      renderError(`Something went wrong. please try again. ${err.message}`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
 };
-getCountyData("belarus");
+btn.addEventListener("click", function () {
+  getCountyData("portugal");
+});
