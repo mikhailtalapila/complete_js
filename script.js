@@ -1,282 +1,74 @@
 "use strict";
 
-// prettier-ignore
-const form = document.querySelector(".form");
-const containerWorkouts = document.querySelector(".workouts");
-const inputType = document.querySelector(".form__input--type");
-const inputDistance = document.querySelector(".form__input--distance");
-const inputDuration = document.querySelector(".form__input--duration");
-const inputCadence = document.querySelector(".form__input--cadence");
-const inputElevation = document.querySelector(".form__input--elevation");
+//
 
-class Workout {
-  date = new Date();
-  id = (Date.now() + "").slice(-10);
-  clicks = 0;
-  constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
-  }
-  _setDescription() {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}`;
-  }
-  click() {
-    this.clicks++;
-  }
-}
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
-class Running extends Workout {
-  type = "running";
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
-    this.cadence = cadence;
-    this.calcPace();
-    this.pace = this.duration / this.distance;
-    this._setDescription();
-  }
-  calcPace() {
-    this.pace = this.duration / this.distance;
-    return this.pace;
-  }
-}
-class Cycling extends Workout {
-  type = "cycling";
+// // NEW COUNTRIES API URL (use instead of the URL shown in videos):
+// // https://restcountries.com/v2/name/portugal
 
-  constructor(coords, distance, duration, elevationGain) {
-    super(coords, distance, duration);
-    this.elevationGain = elevationGain;
-    this._setDescription();
-    this.speed = this.distance / (this.duration / 60);
-  }
-  calcSpeed() {
-    this.speed = this.distance / (this.duration / 60);
-    return this.speed;
-  }
-}
+// // NEW REVERSE GEOCODING API URL (use instead of the URL shown in videos):
+// // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
 
-// const run1 = new Running([39, -12], 5.2, 24, 178);
-
-// const cycling = new Cycling([39, -12], 27, 95, 178);
-// const cycling1 = new Cycling([39, -12], 27, 95, 189);
-// const cycling2 = new Cycling([39, -12], 28, 12, 178);
-
-//application architecture
-
-class App {
-  #map;
-  #mapEvent;
-  #workouts = [];
-  #mapZoomLevel = 13;
-
-  constructor() {
-    this._getPosition();
-
-    form.addEventListener("submit", this._newWorkout.bind(this));
-    inputType.addEventListener("change", this._toggleElevationField);
-    containerWorkouts.addEventListener("click", this._moveToPopup.bind(this));
-    this._getLocalStorage();
-  }
-  _getPosition() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this._loadMap.bind(this),
-        function () {
-          alert("could not get your position");
-        }
-      );
-    }
-  }
-  _loadMap(position) {
-    const { latitude } = position.coords;
-    const { longitude } = position.coords;
-    const coords = [latitude, longitude];
-
-    this.#map = L.map("map").setView(coords, this.#mapZoomLevel);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.#map);
-    //handling click on maps
-    this.#map.on("click", this._showForm.bind(this));
-    this.#workouts.forEach((work) => {
-      this._renderWorkoutMarker(work);
-    });
-  }
-
-  _showForm(mapE) {
-    this.#mapEvent = mapE;
-    form.classList.remove("hidden");
-    inputDistance.focus();
-  }
-  _hideForm() {
-    inputDistance.value = inputCadence.value = inputDuration.value = "";
-    form.computedStyleMap.display = "none";
-    form.classList.add("hidden");
-    setTimeout(() => (form.style.display = "grid"), 1000);
-  }
-  _toggleElevationField() {
-    inputElevation
-      .closest(".form__row--hidden")
-      .classList.toggle("form__row--hidden");
-    inputCadence
-      .closest(".form__row--hidden")
-      .classList.toggle("form__row--hidden");
-  }
-
-  _newWorkout(e) {
-    const validInputs = (...inputs) =>
-      inputs.every((inp) => Number.isFinite(inp));
-    const allPositibe = (...inputs) => inputs.every((inp) => inp > 0);
-    e.preventDefault();
-    const type = inputType.value;
-    const distance = +inputDistance.value;
-    const duration = +inputDuration.value;
-    let workout;
-    const { lat, lng } = this.#mapEvent.latlng;
-    if (type === "running") {
-      const cadence = +inputCadence.value;
-      if (
-        // !Number.isFinite(distance) ||
-        // !Number.isFinite(duration) ||
-        // !Number.isFinite(cadence)
-        !validInputs(distance, duration, cadence) ||
-        !allPositibe(distance, duration, cadence)
-      )
-        return alert("Inputs have to be positive numbers");
-      workout = new Running([lat, lng], distance, duration, cadence);
-    }
-
-    if (type === "cycling") {
-      const elevation = +inputElevation.value;
-      if (
-        !validInputs(distance, duration, elevation) ||
-        !allPositibe(distance, duration, elevation)
-      )
-        return alert("Inputs have to be positive numbers");
-      workout = new Cycling([lat, lng], distance, duration, elevation);
-    }
-    this.#workouts.push(workout);
-
-    // Get data from form.
-
-    // check if data is valid
-
-    // if workout running,
-
-    // if workout cycling
-    this._renderWorkout(workout);
-
-    this._renderWorkoutMarker(workout);
-    this._hideForm();
-
-    this._setLocalStorage();
-  }
-  _renderWorkout(workout) {
-    let html = `
-    <li class="workout workout--${workout.type}" data-id="${workout.id}">
-          <h2 class="workout__title">${workout.description}</h2>
-          <div class="workout__details">
-            <span class="workout__icon">${
-              workout.name === "running" ? "🏃‍♂️" : "🚴‍♀️"
-            }</span>
-            <span class="workout__value">${workout.distance}</span>
-            <span class="workout__unit">km</span>
+const renderCountry = function (data, className = "") {
+  const html = `
+  <article class="country ${className}">
+          <img class="country__img" src="${data.flag}" />
+          <div class="country__data">
+            <h3 class="country__name">${data.name}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${data.population} people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
           </div>
-          <div class="workout__details">
-            <span class="workout__icon">⏱</span>
-            <span class="workout__value">${workout.duration}</span>
-            <span class="workout__unit">min</span>
-          </div>
-    `;
-    if (workout.type === "running") {
-      html += `<div class="workout__details">
-            <span class="workout__icon">⚡️</span>
-            <span class="workout__value">${workout.pace.toFixed(1)}</span>
-            <span class="workout__unit">min/km</span>
-          </div>
-          <div class="workout__details">
-            <span class="workout__icon">🦶🏼</span>
-            <span class="workout__value">${workout.cadence}</span>
-            <span class="workout__unit">spm</span>
-          </div>
-        </li>`;
-    }
-    if (workout.type === "cycling") {
-      html += `<div class="workout__details">
-            <span class="workout__icon">⚡️</span>
-            <span class="workout__value">${workout.speed.toFixed(1)}</span>
-            <span class="workout__unit">km/h</span>
-          </div>
-          <div class="workout__details">
-            <span class="workout__icon">⛰</span>
-            <span class="workout__value">${workout.elevationGain}</span>
-            <span class="workout__unit">m</span>
-          </div>
-        </li>`;
-    }
-    form.insertAdjacentHTML("afterend", html);
-  }
-  _renderWorkoutMarker(workout) {
-    L.marker(workout.coords)
-      .addTo(this.#map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoclose: false,
-          closeOnClick: false,
-          className: `${workout.type}-popup`,
-        })
-      )
-      .setPopupContent(
-        `${workout.name === "running" ? "🏃‍♂️" : "🚴‍♀️"} ${workout.description}`
-      )
-      .openPopup();
-  }
-  _moveToPopup(e) {
-    const workoutEl = e.target.closest(".workout");
-    if (!workoutEl) return;
-    const workout = this.#workouts.find(
-      (work) => work.id === workoutEl.dataset.id
-    );
-    this.#map.setView(workout.coords, this.#mapZoomLevel, {
-      animate: true,
-      pan: {
-        duration: 1,
-      },
-    });
-  }
-  _setLocalStorage() {
-    localStorage.setItem("workouts", JSON.stringify(this.#workouts));
-  }
-  _getLocalStorage() {
-    const data = JSON.parse(localStorage.getItem("workouts"));
-    if (!data) return;
-    this.#workouts = data;
-    this.#workouts.forEach((work) => {
-      this._renderWorkout(work);
-    });
-  }
-  reset() {
-    localStorage.removeItem("workouts");
-    location.reload();
-  }
-}
-const app = new App();
+  `;
+
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+  countriesContainer.style.opacity = 1;
+};
+// const getCountryAndNeighbourData = function (county) {
+//   const request = new XMLHttpRequest();
+//   request.open("GET", `https://restcountries.com/v2/name/${county}`);
+//   request.send();
+//   request.addEventListener("load", function () {
+//     const [data] = JSON.parse(request.responseText);
+//     console.log(data);
+//     //render country 1
+//     renderCountry(data);
+//     const [neighbour] = data.borders;
+//     if (!neighbour) return;
+//     const request2 = new XMLHttpRequest();
+//     request2.open("GET", `https://restcountries.com/v2/alpha/${neighbour}`);
+//     request2.send();
+//     request2.addEventListener("load", function () {
+//       const data2 = JSON.parse(request2.responseText);
+//       console.log(data2);
+//       renderCountry(data2, "neighbour");
+//     });
+//   });
+// };
+// getCountryAndNeighbourData("latvia");
+
+// setTimeout(() => {
+//   console.log("1 second passed");
+//   setTimeout(() => {
+//     console.log("1 second. passed");
+//     setTimeout(() => {
+//       console.log("one second passed.");
+//       setTimeout(() => {
+//         console.log("one second passed.");
+//         setTimeout(() => {
+//           console.log("2 seconds have passed.");
+//         }, 2000);
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+const getCountyData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((responce) => responce.json())
+    .then((data) => renderCountry(data[0]));
+};
+getCountyData("belarus");
