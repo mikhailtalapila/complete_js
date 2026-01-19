@@ -159,4 +159,59 @@
 // });
 // console.log("test end");
 
-const lotteryPromise = new Promise(function (resolve, reject) {});
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   if (Math.random() > 0.5) {
+//     resolve("You WIN");
+//   } else {
+//     reject("You lost");
+//   }
+// });
+//
+// lotteryPromise
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+//
+
+// var lotteryPromse = new Promise(function(resolve, reject) {
+//     if(Math.random() > 0.5) {
+//         resolve('You won');
+//     } else {
+//         reject('you lost');
+//     }
+// });
+
+// var lotteryPromise = new Promise(function (res, rej) {
+//   if (Math.random() > 0.5) {
+//     res("you won");
+//   } else {
+//     rej("you lost");
+//   }
+// });
+// lotteryPromise
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+//
+
+var yesNoPromise = new Promise(function (resolve, reject) {
+  console.log("lottery is now...");
+  setTimeout(function () {
+    if (Math.random() > 0.5) {
+      resolve("Yes");
+    } else {
+      reject(new Error("no"));
+    }
+  }, 2000);
+});
+yesNoPromise.then((res) => console.log(res)).catch((err) => console.error(err));
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+wait(2)
+  .then(() => {
+    console.log("waited for seconds");
+    return wait(3);
+  })
+  .then(() => console.log("waited for 3 seconds"));
