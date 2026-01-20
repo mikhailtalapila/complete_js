@@ -235,11 +235,6 @@ const renderCountry = function (data, className = "") {
 
 // getPosition().then((res) => console.log(res));
 
-const getPosition = function () {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-};
 // getPosition()
 //   .then((res) => console.log(res))
 //   .catch((err) => console.error(err));
@@ -356,43 +351,123 @@ const getPosition = function () {
 //   .then((img) => console.log("image 3 loaded"))
 //   .catch((err) => console.error(err));
 //
-const wait = function (seconds) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, seconds * 1000);
-  });
-};
-let currentImage;
-const imageContainer = document.querySelector(".images");
-const loadImage = function (imgSource) {
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+// let currentImage;
+// const imageContainer = document.querySelector(".images");
+// const loadImage = function (imgSource) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement("img");
+//     img.src = imgSource;
+//     img.addEventListener("load", function () {
+//       imageContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener("error", function () {
+//       reject(new Error("image could not be loaded"));
+//     });
+//   });
+// };
+//
+//
+//
+//
+//
+//
+// loadImage("img/img-1.jpg")
+//   .then((img) => {
+//     currentImage = img;
+//     console.log("image 1 loaded successfully");
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImage.style.display = "none";
+//     return loadImage("img/img-2.jpg");
+//   })
+//   .then((img) => {
+//     currentImage = img;
+//     console.log("image 2 loaded successfully");
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImage.style.display = "none";
+//   })
+//   .catch((error) => console.error(img));
+//
+// let curImage;
+// const imageContainer = document.querySelector(".images");
+// const loadImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement("img");
+//     img.src = imgPath;
+//     img.addEventListener("load", function () {
+//       imageContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener("error", function () {
+//       reject(new Error("Unable to load image"));
+//     });
+//   });
+// };
+
+// loadImage("img/img-3.jpg")
+//   .then((img) => {
+//     curImage = img;
+//     console.log("image loaded successfully");
+//     return wait(1);
+//   })
+//   .then(() => {
+//     curImage.style.display = "none";
+//     loadImage("img/img-2.jpg");
+//   })
+//   .catch((err) => console.error(err));
+
+// const whereAmI = async function (country) {
+//   const resp = await fetch(`https://restcountries.com/v2/alpha/${country}`);
+//   const data = await resp.json();
+//   console.log(data);
+// };
+const getPosition = function () {
   return new Promise(function (resolve, reject) {
-    const img = document.createElement("img");
-    img.src = imgSource;
-    img.addEventListener("load", function () {
-      imageContainer.append(img);
-      resolve(img);
-    });
-    img.addEventListener("error", function () {
-      reject(new Error("image could not be loaded"));
-    });
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
 
-loadImage("img/img-1.jpg")
-  .then((img) => {
-    currentImage = img;
-    console.log("image 1 loaded successfully");
-    return wait(2);
-  })
-  .then(() => {
-    currentImage.style.display = "none";
-    return loadImage("img/img-2.jpg");
-  })
-  .then((img) => {
-    currentImage = img;
-    console.log("image 2 loaded successfully");
-    return wait(2);
-  })
-  .then(() => {
-    currentImage.style.display = "none";
-  })
-  .catch((error) => console.error(img));
+const whereAmI = async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: long } = pos.coords;
+    const res = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}`
+    );
+    if (!res.ok) throw new Error("problem getting location data");
+    const dataGeo = await res.json();
+    console.log(dataGeo);
+    const countryResp = await fetch(
+      `https://restcountries.com/v2/alpha/${dataGeo.countryCode}`
+    );
+    if (!countryResp.ok) throw new Error("Problem getting country");
+    const country = await countryResp.json();
+    console.log(country);
+    renderCountry(country);
+    // const data = await resp.json();
+    // console.log(data);
+    countriesContainer.style.opacity = 1;
+  } catch (error) {
+    console.error(error);
+  }
+};
+console.log("1: will get location");
+whereAmI();
+console.log("2: finished getting location");
+
+// try {
+//   let y = 1;
+//   const x = 2;
+//   x = 3;
+// } catch (error) {
+//   alert(error.message);
+// }
