@@ -3,7 +3,7 @@
 // //
 
 // const btn = document.querySelector(".btn-country");
-// const countriesContainer = document.querySelector(".countries");
+const countriesContainer = document.querySelector(".countries");
 
 // // // NEW COUNTRIES API URL (use instead of the URL shown in videos):
 // // // https://restcountries.com/v2/name/portugal
@@ -14,20 +14,20 @@
 //   countriesContainer.insertAdjacentText("beforeend", message);
 //   countriesContainer.style.opacity = 1;
 // };
-// const renderCountry = function (data, className = "") {
-//   const html = `
-//   <article class="country ${className}">
-//           <img class="country__img" src="${data.flag}" />
-//           <div class="country__data">
-//             <h3 class="country__name">${data.name}</h3>
-//             <h4 class="country__region">${data.region}</h4>
-//             <p class="country__row"><span>👫</span>${data.population} people</p>
-//             <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-//             <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-//           </div>
-//   `;
-
-//   countriesContainer.insertAdjacentHTML("beforeend", html);
+const renderCountry = function (data, className = "") {
+  const html = `
+  <article class="country ${className}">
+          <img class="country__img" src="${data.flag}" />
+          <div class="country__data">
+            <h3 class="country__name">${data.name}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${data.population} people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+          </div>
+  `;
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+};
 //   //countriesContainer.style.opacity = 1;
 // };
 // // const getCountryAndNeighbourData = function (county) {
@@ -190,28 +190,209 @@
 // lotteryPromise
 //   .then((res) => console.log(res))
 //   .catch((err) => console.error(err));
+// //
+//
+// var yesNoPromise = new Promise(function (resolve, reject) {
+//   console.log("lottery is now...");
+//   setTimeout(function () {
+//     if (Math.random() > 0.5) {
+//       resolve("Yes");
+//     } else {
+//       reject(new Error("no"));
+//     }
+//   }, 2000);
+// });
+// yesNoPromise.then((res) => console.log(res)).catch((err) => console.error(err));
+//
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+// wait(2)
+//   .then(() => {
+//     console.log("waited for seconds");
+//     return wait(3);
+//   })
+//   .then(() => console.log("waited for 3 seconds"));
+//
+// Promise.resolve("abc").then(() => console.log("test"));
+// Promise.reject("err").then(() => console.log("err"));
 //
 
-var yesNoPromise = new Promise(function (resolve, reject) {
-  console.log("lottery is now...");
-  setTimeout(function () {
-    if (Math.random() > 0.5) {
-      resolve("Yes");
-    } else {
-      reject(new Error("no"));
-    }
-  }, 2000);
-});
-yesNoPromise.then((res) => console.log(res)).catch((err) => console.error(err));
+// console.log("getting position");
+// const getPosition = function () {
+//   return new Promise(function (resvolve, reject) {
+//     // navigator.geolocation.getCurrentPosition(
+//     //   (position) => {
+//     //     resvolve(position);
+//     //   },
+//     //   (err) => reject(err)
+//     // );
+//     navigator.geolocation.getCurrentPosition(resvolve, reject);
+//   });
+// };
 
+// getPosition().then((res) => console.log(res));
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+// getPosition()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+
+// const getLanguage = function () {
+//   return new Promise(function (resolve, reject) {
+//     resolve(navigator.languages[0]);
+//     reject("no language set");
+//   });
+// };
+//
+// getLanguage()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+//
+// const whereImI = function () {
+//   getPosition()
+//     .then((pos) => {
+//       console.log(pos.coords);
+//       const { latitude: lat, longitude: long } = pos.coords;
+//       return fetch(
+//         `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}`
+//       );
+//     })
+//     .then((resp) => {
+//       if (!resp.ok) throw new Error(`Problem with geocoding: ${resp.status}`);
+//       return resp.json();
+//     })
+//     .then((data) => {
+//       console.log(data);
+//       console.log(`you are in ${data.city} ${data.countryName}`);
+//       return data;
+//     })
+//     .then((data) => {
+//       if (!data) throw new Error(`data not found`);
+//       console.log(data);
+//       return fetch(`https://restcountries.com/v2/alpha/${data.countryCode}`);
+//     })
+//     .then((resp) => {
+//       if (!resp.ok) throw new Error("No country found");
+//       return resp.json();
+//     })
+//     .then((data) => {
+//       renderCountry(data);
+//       console.log(data);
+//     })
+//     .catch((err) => {
+//       console.log(`${err}`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+//
+// whereImI();
+// const imgContainer = document.querySelector(".images");
+//
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement("img");
+//     img.src = imgPath;
+//     img.addEventListener("load", function () {
+//       imgContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener("error", function () {
+//       reject(new Error("image not found"));
+//     });
+//   });
+// };
+//
+// createImage("img/img-1.jpg").then((img) => {
+//   console.log("image 1 loaded");
+// });
+//
+
+// const imageContainer = document.querySelector(".images");
+//
+// const loadImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement("img");
+//     img.src = imgPath;
+//     img.addEventListener("load", function () {
+//       imageContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener("error", function () {
+//       reject(new Error("Unable to load image"));
+//     });
+//   });
+// };
+// loadImage("img/img-2.jpg")
+//   .then(() => {
+//     console.log("image load successfully");
+//   })
+//   .catch((err) => console.error(err.message));
+//
+
+// const imageContainer = document.querySelector(".images");
+// const loadImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement("img");
+//     img.src = imgPath;
+//     img.addEventListener("load", function () {
+//       imageContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener("error", function () {
+//       reject(new Error("error image loading..."));
+//     });
+//   });
+// };
+// loadImage("img/img-3.jpg")
+//   .then((img) => console.log("image 3 loaded"))
+//   .catch((err) => console.error(err));
+//
 const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
   });
 };
-wait(2)
-  .then(() => {
-    console.log("waited for seconds");
-    return wait(3);
+let currentImage;
+const imageContainer = document.querySelector(".images");
+const loadImage = function (imgSource) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement("img");
+    img.src = imgSource;
+    img.addEventListener("load", function () {
+      imageContainer.append(img);
+      resolve(img);
+    });
+    img.addEventListener("error", function () {
+      reject(new Error("image could not be loaded"));
+    });
+  });
+};
+
+loadImage("img/img-1.jpg")
+  .then((img) => {
+    currentImage = img;
+    console.log("image 1 loaded successfully");
+    return wait(2);
   })
-  .then(() => console.log("waited for 3 seconds"));
+  .then(() => {
+    currentImage.style.display = "none";
+    return loadImage("img/img-2.jpg");
+  })
+  .then((img) => {
+    currentImage = img;
+    console.log("image 2 loaded successfully");
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+  })
+  .catch((error) => console.error(img));
