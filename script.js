@@ -456,13 +456,34 @@ const whereAmI = async function () {
     // const data = await resp.json();
     // console.log(data);
     countriesContainer.style.opacity = 1;
+    return `You are here`;
   } catch (error) {
     console.error(error);
   }
 };
-console.log("1: will get location");
-whereAmI();
-console.log("2: finished getting location");
+(async function () {
+  try {
+    const city = await whereAmI();
+  } catch (error) {
+    console.log("error message");
+  }
+})();
+
+const getThreeCountries = async function (c1, c3, c2) {
+  try {
+    // const [data1] = await getJson(`test-c1`);
+    // const [data2] = await getJson(`test2-c2`);
+    // const [data3] = await getJson(`test-c3`);
+    Promise.all();
+  } catch (error) {
+    console.error(error);
+  }
+};
+// console.log("1: will get location");
+// const city = whereAmI();
+// console.log(city);
+// whereAmI().then((city) => console.log(city));
+// console.log("2: finished getting location");
 
 // try {
 //   let y = 1;
@@ -471,3 +492,42 @@ console.log("2: finished getting location");
 // } catch (error) {
 //   alert(error.message);
 // }
+const getJson = function (url, error) {
+  return fetch(url).then((response) => {
+    if (!response.ok) throw new Error(`${error}: ${response.status}`);
+    return response.json();
+  });
+};
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error("request took too long"));
+    }, sec * 1000);
+  });
+};
+
+Promise.race([
+  timeout(0.01),
+  getJson(`https://restcountries.com/v2/name/germany`),
+])
+  .then((data) => {
+    return data;
+  })
+  .then((data) => console.log(data[0]));
+
+//promised.allSettled
+Promise.allSettled([
+  Promise.resolve("success"),
+  Promise.reject("error"),
+  Promise.reject("error2"),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+Promise.any([
+  Promise.resolve("success"),
+  Promise.reject("error"),
+  Promise.reject("error2"),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
