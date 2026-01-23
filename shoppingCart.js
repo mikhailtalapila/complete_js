@@ -2,7 +2,9 @@
 console.log("exporting module");
 const shippingCost = 10;
 // const cart = [];
-
+// console.log("start fetching users...");
+// await fetch(`https://jsonplaceholder.typicode.com/posts`);
+// console.log("finised fetching users...");
 export const addToCart = function (product, quantity) {
   cart.push({ product, quantity });
   console.log(`${quantity} ${product} was added to the cart`);
