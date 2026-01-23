@@ -430,104 +430,163 @@ const renderCountry = function (data, className = "") {
 //   const data = await resp.json();
 //   console.log(data);
 // };
-const getPosition = function () {
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// const whereAmI = async function () {
+//   try {
+//     const pos = await getPosition();
+//     const { latitude: lat, longitude: long } = pos.coords;
+//     const res = await fetch(
+//       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}`
+//     );
+//     if (!res.ok) throw new Error("problem getting location data");
+//     const dataGeo = await res.json();
+//     console.log(dataGeo);
+//     const countryResp = await fetch(
+//       `https://restcountries.com/v2/alpha/${dataGeo.countryCode}`
+//     );
+//     if (!countryResp.ok) throw new Error("Problem getting country");
+//     const country = await countryResp.json();
+//     console.log(country);
+//     renderCountry(country);
+//     // const data = await resp.json();
+//     // console.log(data);
+//     countriesContainer.style.opacity = 1;
+//     return `You are here`;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// (async function () {
+//   try {
+//     const city = await whereAmI();
+//   } catch (error) {
+//     console.log("error message");
+//   }
+// })();
+
+// const getThreeCountries = async function (c1, c3, c2) {
+//   try {
+//     // const [data1] = await getJson(`test-c1`);
+//     // const [data2] = await getJson(`test2-c2`);
+//     // const [data3] = await getJson(`test-c3`);
+//     Promise.all();
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// // console.log("1: will get location");
+// // const city = whereAmI();
+// // console.log(city);
+// // whereAmI().then((city) => console.log(city));
+// // console.log("2: finished getting location");
+
+// // try {
+// //   let y = 1;
+// //   const x = 2;
+// //   x = 3;
+// // } catch (error) {
+// //   alert(error.message);
+// // }
+// const getJson = function (url, error) {
+//   return fetch(url).then((response) => {
+//     if (!response.ok) throw new Error(`${error}: ${response.status}`);
+//     return response.json();
+//   });
+// };
+// const timeout = function (sec) {
+//   return new Promise(function (_, reject) {
+//     setTimeout(function () {
+//       reject(new Error("request took too long"));
+//     }, sec * 1000);
+//   });
+// };
+
+// Promise.race([
+//   timeout(0.01),
+//   getJson(`https://restcountries.com/v2/name/germany`),
+// ])
+//   .then((data) => {
+//     return data;
+//   })
+//   .then((data) => console.log(data[0]));
+
+// //promised.allSettled
+// Promise.allSettled([
+//   Promise.resolve("success"),
+//   Promise.reject("error"),
+//   Promise.reject("error2"),
+// ])
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+
+// Promise.any([
+//   Promise.resolve("success"),
+//   Promise.reject("error"),
+//   Promise.reject("error2"),
+// ])
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+
+const imageContainer = document.querySelector(".images");
+const createImage = function (imgSource) {
   return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+    const img = document.createElement("img");
+    img.src = imgSource;
+    img.addEventListener("load", function () {
+      imageContainer.append(img);
+      resolve(img);
+    });
+    img.addEventListener("error", function () {
+      reject(new Error("image could not be loaded"));
+    });
   });
 };
-
-const whereAmI = async function () {
-  try {
-    const pos = await getPosition();
-    const { latitude: lat, longitude: long } = pos.coords;
-    const res = await fetch(
-      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}`
-    );
-    if (!res.ok) throw new Error("problem getting location data");
-    const dataGeo = await res.json();
-    console.log(dataGeo);
-    const countryResp = await fetch(
-      `https://restcountries.com/v2/alpha/${dataGeo.countryCode}`
-    );
-    if (!countryResp.ok) throw new Error("Problem getting country");
-    const country = await countryResp.json();
-    console.log(country);
-    renderCountry(country);
-    // const data = await resp.json();
-    // console.log(data);
-    countriesContainer.style.opacity = 1;
-    return `You are here`;
-  } catch (error) {
-    console.error(error);
-  }
-};
-(async function () {
-  try {
-    const city = await whereAmI();
-  } catch (error) {
-    console.log("error message");
-  }
-})();
-
-const getThreeCountries = async function (c1, c3, c2) {
-  try {
-    // const [data1] = await getJson(`test-c1`);
-    // const [data2] = await getJson(`test2-c2`);
-    // const [data3] = await getJson(`test-c3`);
-    Promise.all();
-  } catch (error) {
-    console.error(error);
-  }
-};
-// console.log("1: will get location");
-// const city = whereAmI();
-// console.log(city);
-// whereAmI().then((city) => console.log(city));
-// console.log("2: finished getting location");
-
-// try {
-//   let y = 1;
-//   const x = 2;
-//   x = 3;
-// } catch (error) {
-//   alert(error.message);
-// }
-const getJson = function (url, error) {
-  return fetch(url).then((response) => {
-    if (!response.ok) throw new Error(`${error}: ${response.status}`);
-    return response.json();
-  });
-};
-const timeout = function (sec) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error("request took too long"));
-    }, sec * 1000);
-  });
-};
-
-Promise.race([
-  timeout(0.01),
-  getJson(`https://restcountries.com/v2/name/germany`),
-])
-  .then((data) => {
-    return data;
+let currentImage;
+createImage("img/img-1.jpg")
+  .then((img) => {
+    currentImage = img;
+    console.log("image 1 loaded successfully");
+    return wait(2);
   })
-  .then((data) => console.log(data[0]));
+  .then(() => {
+    currentImage.style.display = "none";
+    return loadImage("img/img-2.jpg");
+  })
+  .then((img) => {
+    currentImage = img;
+    console.log("image 2 loaded successfully");
+    return wait(2);
+  })
+  .then(() => {
+    currentImage.style.display = "none";
+  })
+  .catch((error) => console.error(error));
 
-//promised.allSettled
-Promise.allSettled([
-  Promise.resolve("success"),
-  Promise.reject("error"),
-  Promise.reject("error2"),
-])
-  .then((res) => console.log(res))
-  .catch((err) => console.error(err));
+const loadNPause = async function () {
+  try {
+    let img = await createImage("img/img-1.jpg");
+    console.log("image 1 loaded");
+    await wait(2);
+    img.style.display = "none";
+    img = await createImage("img/img-2.jpg");
+    await wait(2);
+    img.style.display = "none";
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-Promise.any([
-  Promise.resolve("success"),
-  Promise.reject("error"),
-  Promise.reject("error2"),
-])
-  .then((res) => console.log(res))
-  .catch((err) => console.error(err));
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(async (img) => await createImage(img));
+    const imgEl = await Promise.all(imgs);
+    imgEl.forEach((img) => img.classList.add("parallel"));
+  } catch (error) {
+    console.error(error);
+  }
+};
