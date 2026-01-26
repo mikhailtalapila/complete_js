@@ -14,7 +14,7 @@ export default class View {
         this._generateMarkup(),
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -22,7 +22,6 @@ export default class View {
     this._parentElement.innerHTML = "";
   }
   renderSpinner = function () {
-    console.log(this._parentElement);
     const markup = `
         <div class="spinner">
                 <svg>
@@ -49,7 +48,6 @@ export default class View {
   }
 
   renderError(message = this._errorMessage) {
-    console.log("hereee");
     const markup = `
       <div class="error">
       <div>
