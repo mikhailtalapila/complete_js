@@ -13,8 +13,9 @@ const recipeContainer = document.querySelector(".recipe");
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    recipeView.renderSpinner();
     if (!id) return;
+    recipeView.renderSpinner();
+    resultsView.update(model.getSearchResultsPage());
     await model.loadRecipe(id);
     const { recipe } = model.state;
     recipeView.render(model.state.recipe);
@@ -45,7 +46,7 @@ const controlServings = function (newServings) {
   // update the recipe servings (in state)
   model.updateServings(newServings);
   // update the recipe view
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 const init = function () {
