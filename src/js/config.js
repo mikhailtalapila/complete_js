@@ -1,3 +1,5 @@
 export const API_URL = "https://forkify-api.jonas.io/api/v2/recipes/";
 export const TIMTOUT_SEC = 10;
 export const PAGE_SIZE = 10;
+export const KEY = "1234-1234-1234-1234-1234";
+export const MODAL_CLOSE_SEC = 2.5;
